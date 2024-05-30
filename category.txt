@@ -1,0 +1,131 @@
+1. Civil Engineering
+
+notes: /notes/notes_civil_eng
+
+Technical:
+- Structural Engineering /civil_eng_central_obj/subj-01/questions
+- Engineering Survey /civil_eng_central_obj/subj-02/questions
+- Construction Materials /civil_eng_central_obj/subj-03/questions
+- Concrete Technology /civil_eng_central_obj/subj-04/questions
+- GeoTechnical Engineering /civil_eng_central_obj/subj-05/questions
+- Construction Management /civil_eng_central_obj/subj-06/questions
+- Estimating,Costing, SPecification and Valuation /civil_eng_central_obj/subj-07/questions
+- Engineering Drawing /civil_eng_central_obj/subj-08/questions
+- Engineering Econmics /civil_eng_central_obj/subj-09/questions
+- Professional Practices /civil_eng_central_obj/subj-10/questions
+
+Gk:
+- Nepal bhugol  /gk/subj-02/I
+- Nepal adhunik itihash  /gk/subj-05/I
+- The constition of Nepal (From part 1 to 5 and)  /gk/subj-23/I
+- Nepal Sasanpraddati ra sarkar   /gk/subj-07/I
+- Current Periodic Plan of Nepal   /gk/subj-22/I
+- Bigyan ra prabidhi  /gk/subj-09/I
+- Prasistiti paddati ra batabarad   /gk/subj-10/I
+- Antarastarayi sambandha tatha sangha/sanstha   /gk/subj-11/I   
+- Rastriya ra antarastriya mahataka rajnitik,samajik,athrik   /gk/subj-12/I 
+- Provision of civil service act and regulation   /gk/subj-17/I
+- Public service charter and functional scope of p   /gk/subj-18/I
+- Concept,objective and importance of p   /gk/subj-19/I
+- Fundamental of management: plannning,organizing   /gk/subj-20/I
+- Government plannning,budgeting and accounting   /gk/subj-21/I
+
+IQ:
+
+- Verbal Ability Test /iq/subj-01/questions
+- Non-verabal/ABstract Ability  /iq/subj-02/questions
+- Numerical Ability Test  /iq/subj-03/questions
+- Data Interpretation  /iq/subj-05/questions
+
+
+
+Adhikirit:
+GK:
+
+- Biswo bhugol  /gk/subj-03/I
+- Biswo itihash  /gk/subj-04/I
+- Nepal samajik ayom sankiritic awasta  /gk/subj-06/I
+- sambhidan sambandhi janakari  /gk/subj-25/I?I
+- Nepal arthik awastha  /gk/subj-08/I
+
+IQ:
+- General  Mentality test /iq/subj-04/questions
+
+English:
+- Comprehension  /english_competence_test/subj-01/questions
+- Vocabalary  /english_competence_test/subj-02/questions
+- Syntactic Ability  /english_competence_test/subj-03/questions
+
+
+NayabSubhha:
+GK:
+- Bramand sambandi janakari  /gk/subj-01/I
+- Bisso ko bhugol  /gk/subj-03/I
+- Bisso ko itihash /gk/subj-04/I
+- Bigyan ra prabidhi /gk/subj-09/I
+- Rastriya ra antarastriya mahataka rajnitik, samajik, arthik /gk/subj-12/I
+
+
+Inspector:
+
+GK:
+- Nepalko  yojanabadhha bikashkaram  /gk/subj-22/I
+- Nepal police in UN;EU,NATO,INTERPOL,SAARC  /gk/subj-13/I
+- Bansa(gene),bansadhu(genetics) ra bidhi(foreinsic science)  /gk/subj-14/I
+- Bansa(gene),bansadhu(genetics) ra bidhi(foreinsic science)  /gk/subj-14/I
+- Nepalka suruxa nikayharu sambhandi samsayik janakari  /gk/subj-15/I
+- Nepalka suruxa nikayharu sambhandi samsayik janakari  /gk/subj-15/I
+
+
+As. Sub-Inspector
+GK:
+- Nepal bikashka purbhadharaharu: kirsi,uthog,pratan,sikshya /gk/subj-08/I
+
+
+Officer cadet:
+GK:
+- Bharat ra chin rajnitik padatti ra sasan + sambesikarad /gk/subj-26/I
+
+English:
+
+- Articles /english_lieutenant/subj-01/questions
+- Transformation:NEgation,yes/no /english_lieutenant/subj-02/questions
+- Question tags /english_lieutenant/subj-03/questions
+- Most frequent English Prepostion: at,by,from... /english_lieutenant/subj-04/questions
+- Direct and Indirect Speech /english_lieutenant/subj-05/questions
+- Active and Passive /english_lieutenant/subj-06/questions
+- Causative verbs:(have,get,make,let) and cond /english_lieutenant/subj-07/questions
+- Tense-aspects system in English /english_lieutenant/subj-07/questions
+- Tense-aspects system in English /english_lieutenant/subj-08/questions
+- Subject-verb agreeement in English /english_lieutenant/subj-09/questions
+- Use of conjunctions: and ,because,because of,... /english_lieutenant/subj-10/questions
+
+
+
+
+1. mahadesh
+2. mahasagar
+3. jalxetra
+4.nadinala ra himnadi
+5. taal gharna
+6. naharharu
+7. prbat srikhala
+8. tapu wochha    33333333333333333333333333333333333
+9. marubhumi
+10. kritiman
+11. asia 
+12. africa
+13. europe
+14. wotar america
+15. daxid america 
+16. austraila
+17. bibhinna bhaga
+18. mahatpurna baaddh
+19. kehi pramuk bhau 
+20. biskobikhayat
+21. desh ra tinko naam
+22. bhagaoilik khoj
+23. antarastriya sima
+24. bhukamph
+25. desh rastriya naam ra desh 
+26. anya 

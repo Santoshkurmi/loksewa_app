@@ -1,0 +1,27 @@
+{
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "loksewa-app-testing",
+          "appId": "1:419453550938:android:f2e469df90f58737def363",
+          "fileOutput": "android/app/google-services.json"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "loksewa-app-testing",
+          "configurations": {
+            "android": "1:419453550938:android:f2e469df90f58737def363",
+            "ios": "1:419453550938:ios:c17b24e6dfe7579cdef363",
+            "macos": "1:419453550938:ios:c17b24e6dfe7579cdef363",
+            "windows": "1:419453550938:web:35e9f913ed1530f7def363"
+          }
+        }
+      }
+    }
+  },
+  "database": {
+    "rules": "database.rules.json"
+  }
+}
