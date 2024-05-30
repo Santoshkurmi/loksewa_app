@@ -1,11 +1,17 @@
 import 'dart:io';
+import 'dart:math';
+import 'dart:typed_data';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:fl_chart/fl_chart.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:image_picker/image_picker.dart';
@@ -29,8 +35,8 @@ class _AddQuestionScreen extends State<AddQuestionScreen> {
       correctAns = '',
       imageURL = '',
       originalImageURL = '';
-      bool isOptionE = false;
-    
+  bool isOptionE = false;
+
   DatabaseReference reference = FirebaseDatabase.instance.ref("/");
   String? email = FirebaseAuth.instance.currentUser?.email;
   final TextEditingController _titleC = TextEditingController();
@@ -44,9 +50,9 @@ class _AddQuestionScreen extends State<AddQuestionScreen> {
   final TextEditingController _hintTextC = TextEditingController();
   bool isUploading = false;
   bool isImageUploadOption = false;
-  
+
   bool isHintShow = false;
-  String hintText ='';
+  String hintText = '';
 
   void addQuestion(String path, String topicId) async {
     if (path.length < 3 ||
@@ -57,13 +63,13 @@ class _AddQuestionScreen extends State<AddQuestionScreen> {
         optionC.isEmpty ||
         optionD.isEmpty ||
         correctAns.isEmpty) return;
-    if(isOptionE && optionE.isEmpty) return;
+    if (isOptionE && optionE.isEmpty) return;
 
     setState(() {
       isUploading = true;
     });
 
-    if (_questionImage != null && imageURL.length <5) {
+    if (_questionImage != null && imageURL.length < 5) {
       await uploadImage();
     }
 
@@ -74,11 +80,11 @@ class _AddQuestionScreen extends State<AddQuestionScreen> {
       "optionB": optionB,
       "optionC": optionC,
       "optionD": optionD,
-      "optionE": isOptionE ? optionE :null,
+      "optionE": isOptionE ? optionE : null,
       "topicId": topicId,
       "questionImage": imageURL.length < 6 ? null : imageURL,
       "email": email,
-      "hint": hintText.trim().length>3 ? hintText:null,
+      "hint": hintText.trim().length > 3 ? hintText : null,
     }).then((value) {
       Navigator.pop(context);
     }).catchError((error) {
@@ -109,7 +115,7 @@ class _AddQuestionScreen extends State<AddQuestionScreen> {
         _optionCC.text.isEmpty ||
         _optionDC.text.isEmpty ||
         _correctAnsC.text.isEmpty) return;
-    if(isOptionE && _optionEC.text.isEmpty) return;
+    if (isOptionE && _optionEC.text.isEmpty) return;
     setState(() {
       isUploading = true;
     });
@@ -137,9 +143,9 @@ class _AddQuestionScreen extends State<AddQuestionScreen> {
       "optionB": _optionBC.text,
       "optionC": _optionCC.text,
       "optionD": _optionDC.text,
-      "optionE": isOptionE ? optionE :null,
+      "optionE": isOptionE ? optionE : null,
       "questionImage": imageURL.length < 5 ? null : imageURL,
-      "hint": _hintTextC.text.trim().length>3 ? hintText:null,
+      "hint": _hintTextC.text.trim().length > 3 ? hintText : null,
     }).then((value) {
       Navigator.pop(context);
     }).catchError((error) {
@@ -156,13 +162,13 @@ class _AddQuestionScreen extends State<AddQuestionScreen> {
     _optionBC.text = widget.data["optionB"];
     _optionCC.text = widget.data["optionC"];
     _optionDC.text = widget.data["optionD"];
-    optionE = widget.data["optionE"]?? '';
+    optionE = widget.data["optionE"] ?? '';
     _optionEC.text = optionE;
-    if(optionE.isNotEmpty) isOptionE = true;
+    if (optionE.isNotEmpty) isOptionE = true;
     _correctAnsC.text = widget.data["correctAns"];
     _hintTextC.text = widget.data["hint"] ?? '';
     hintText = _hintTextC.text;
-    if(hintText.isNotEmpty){
+    if (hintText.isNotEmpty) {
       isHintShow = true;
     }
     imageURL = widget.data["questionImage"].toString();
@@ -171,22 +177,113 @@ class _AddQuestionScreen extends State<AddQuestionScreen> {
       originalImageURL = imageURL;
     }
   }
+
   Uint8List? compressedImage;
+  double sliderValue = 10;
+  double lastCompressedValue = 10;
   final picker = ImagePicker();
-  File? _questionImage;
+  Uint8List? _questionImage;
   bool isUploaded = false;
+  bool isCompressing = false;
+  
+  void changeState(){
+    setState(() {
+    });
+  }
+
+  void compressImage() async {
+    if (originalImage == null) return;
+    compressedImage = await FlutterImageCompress.compressWithList(
+        originalImage as Uint8List,
+        quality: sliderValue.toInt());
+    await showDialog(
+      context: context,
+      builder: (context) {
+        return StatefulBuilder(builder: (context, setState) {
+          return AlertDialog(
+            title: Text("Resize Image"),
+            content: Column(
+              children: [
+                Expanded(child: Image.memory(compressedImage as Uint8List)),
+                Text(sliderValue.round().toString()),
+                Text( "${(compressedImage!.length~/1024)}kb /${originalImage!.length~/1024}kb" ),
+                Slider(
+                    value: sliderValue,
+                    max: 100,
+                    label: sliderValue.round().toString(),
+                    onChanged: (d) async{
+                      setState(
+                        () {
+                          sliderValue = d;
+                        },
+                      );
+                    }),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    MaterialButton(
+                      onPressed: () {Navigator.pop(context);},
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(15))),
+                      color: Colors.red.shade700,
+                      elevation: 5.0,
+                      child: Text("Cancel"),
+                    ),
+                    isCompressing
+                        ? CircularProgressIndicator()
+                        : MaterialButton(
+                            onPressed: () async {
+                              setState((){isCompressing = true;});
+                              lastCompressedValue = sliderValue;
+                              compressedImage =
+                                  await FlutterImageCompress.compressWithList(
+                                      originalImage as Uint8List,
+                                      quality: sliderValue.toInt());
+                              setState((){isCompressing = false;});
+                            },
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(15))),
+                      color: Colors.purple.shade700,
+                      elevation: 5.0,
+                            child: Text("Preview"),
+                          ),
+                    MaterialButton(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(15))),
+                      color: Colors.green.shade700,
+                      elevation: 5.0,
+                      onPressed: () {
+                        if(lastCompressedValue != sliderValue) return;
+                        _questionImage = compressedImage;
+                        changeState();
+                        Navigator.pop(context);
+                      },
+                      child: Text("Save"),
+                    ),
+                  ],
+                )
+              ],
+            ),
+            // actions: [ElevatedButton(onPressed: (){Navigator.pop(context);}, child: Text("Ok"))],
+            backgroundColor: Colors.blue.shade400,
+          );
+        });
+      },
+    );
+  }
+
+  Uint8List? originalImage;
   void addImage() async {
     final filePicked = await picker.pickImage(source: ImageSource.gallery);
-    setState(() async{
-      if (filePicked != null) {
-       var compressedImage =  await FlutterImageCompress.compressWithFile(filePicked.path,quality: 20);
-        _questionImage = File(filePicked.path);
-        imageURL = "";
-      } //if
-      else {
-        _questionImage = null;
-      }
-    });
+    if (filePicked != null) {
+      _questionImage =await File(filePicked.path).readAsBytes();
+      originalImage = await File(filePicked.path).readAsBytes();
+      imageURL = "";
+    } //if
+    else {
+      _questionImage = null;
+    }
+    setState(() {});
   }
 
   Future<bool> uploadImage() async {
@@ -197,7 +294,7 @@ class _AddQuestionScreen extends State<AddQuestionScreen> {
           .ref()
           .child("images")
           .child(DateTime.now().toString())
-          .putFile(_questionImage as File);
+          .putData(_questionImage as Uint8List);
       // setState(() {
       imageURL = await task.ref.getDownloadURL();
       showSnackBar("Image uploaded successfully");
@@ -299,14 +396,11 @@ class _AddQuestionScreen extends State<AddQuestionScreen> {
                                   ClipRRect(
                                     child: _questionImage != null
                                         ? PhotoView(
-                                            imageProvider: FileImage(
-                                                _questionImage as File),
+                                            imageProvider: MemoryImage(
+                                                _questionImage as Uint8List),
                                             enablePanAlways: true,
-                                            gestureDetectorBehavior:
-                                                HitTestBehavior.translucent,
-                                            tightMode: true,
                                             enableRotation: true,
-                                            customSize: Size(300, 300),
+                                            // customSize: Size(300, 300),
                                           )
                                         : PhotoView(
                                             imageProvider:
@@ -323,7 +417,18 @@ class _AddQuestionScreen extends State<AddQuestionScreen> {
                                               imageURL = "";
                                             });
                                           },
-                                          icon: Icon(Icons.close)))
+                                          icon: Icon(Icons.close))),
+                                  Positioned(
+                                      top: 10,
+                                      right: 40,
+                                      child: Padding(
+                                        padding: const EdgeInsets.symmetric(horizontal: 40),
+                                        child: IconButton(
+                                            onPressed: () {
+                                              compressImage();
+                                            },
+                                            icon: Icon(Icons.compress)),
+                                      )),
                                 ]),
                         ),
                       ),
@@ -332,7 +437,6 @@ class _AddQuestionScreen extends State<AddQuestionScreen> {
               SizedBox(
                 height: 20,
               ),
-              compressedImage!=null?Image.memory(compressedImage as Uint8List):SizedBox(),
               TextField(
                 // minLines: 1,
                 controller: _optionAC,
@@ -404,21 +508,24 @@ class _AddQuestionScreen extends State<AddQuestionScreen> {
               SizedBox(
                 height: 20,
               ),
-              isOptionE? TextField(
-                // minLines: 1,
-                controller: _optionEC,
-                minLines: 1,
-                maxLines: 30,
-                cursorColor: Colors.black,
-                keyboardType: TextInputType.multiline,
-                onChanged: (value) => optionE = value,
-                decoration: InputDecoration(
-                  labelText: 'option E',
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(10))),
-                  prefixIcon: Icon(Icons.keyboard_option_key),
-                ),
-              ):SizedBox(),
+              isOptionE
+                  ? TextField(
+                      // minLines: 1,
+                      controller: _optionEC,
+                      minLines: 1,
+                      maxLines: 30,
+                      cursorColor: Colors.black,
+                      keyboardType: TextInputType.multiline,
+                      onChanged: (value) => optionE = value,
+                      decoration: InputDecoration(
+                        labelText: 'option E',
+                        border: OutlineInputBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(10))),
+                        prefixIcon: Icon(Icons.keyboard_option_key),
+                      ),
+                    )
+                  : SizedBox(),
               SizedBox(
                 height: 20,
               ),
@@ -438,20 +545,23 @@ class _AddQuestionScreen extends State<AddQuestionScreen> {
               SizedBox(
                 height: 20,
               ),
-              isHintShow ? TextField(
-                minLines: 2,
-                maxLines: 100,
-                controller: _hintTextC,
-                cursorColor: Colors.black,
-                keyboardType: TextInputType.multiline,
-                onChanged: (value) => hintText = value,
-                decoration: InputDecoration(
-                  labelText: 'Hint',
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(10))),
-                  prefixIcon: Icon(Icons.lightbulb),
-                ),
-              ):SizedBox(),
+              isHintShow
+                  ? TextField(
+                      minLines: 2,
+                      maxLines: 100,
+                      controller: _hintTextC,
+                      cursorColor: Colors.black,
+                      keyboardType: TextInputType.multiline,
+                      onChanged: (value) => hintText = value,
+                      decoration: InputDecoration(
+                        labelText: 'Hint',
+                        border: OutlineInputBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(10))),
+                        prefixIcon: Icon(Icons.lightbulb),
+                      ),
+                    )
+                  : SizedBox(),
               SizedBox(
                 height: 20,
               ),
