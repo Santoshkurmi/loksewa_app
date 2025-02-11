@@ -282,6 +282,7 @@ class _AddQuestionScreen extends State<AddQuestionScreen> {
     } //if
     else {
       _questionImage = null;
+      originalImage = null;
     }
     setState(() {});
   }

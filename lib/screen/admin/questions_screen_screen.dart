@@ -2,8 +2,12 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_math_fork/flutter_math.dart';
+import 'package:flutter_tex/flutter_tex.dart';
+import 'package:flutter_math_fork/tex.dart';
 import 'package:loksewa/screen/admin/add_screens/add_cheat_questions_screen.dart';
 import 'package:loksewa/screen/admin/add_screens/add_question_screen.dart';
 import 'package:loksewa/screen/admin/model_admin/dummy_data.dart';
@@ -127,7 +131,7 @@ class _TypeScreen extends State<QuestionScreenAdmin> {
       },
     );
   } //delteCurrentElement
-
+var currentQues;
   @override
   Widget build(BuildContext context) {
     // List subcategoriesList  =[];
@@ -143,6 +147,7 @@ class _TypeScreen extends State<QuestionScreenAdmin> {
                 child: ListView.builder(
                   itemCount: questions.length,
                   itemBuilder: (context, index) {
+                    currentQues = questions[index];
                     questions[index][
                             "color${questions.elementAt(index)['correctAns']}"] =
                         Colors.green.shade500;
@@ -218,6 +223,11 @@ class _TypeScreen extends State<QuestionScreenAdmin> {
                                   )
                                 ],
                               ),
+                              // TeXView(
+                              //   child: TeXViewContainer(
+                              //     child: TeXViewDocument("Hello worldfjslfjsdlfjslfjsldjslfjsl")
+                              //   )
+                              //   ),
                               if (questions[index]["questionImage"] != null)
                                 ClipRRect(
                                   child: Padding(
@@ -263,9 +273,10 @@ class _TypeScreen extends State<QuestionScreenAdmin> {
                                         borderRadius:
                                             BorderRadius.circular(10)),
                                     child: ListTile(
-                                      title: Text(
-                                        "a.  ${questions[index]["optionA"]}",
-                                      ),
+                                      // title: Text(
+                                      //   "a.  ${questions[index]["optionA"]}",
+                                      // ),
+                              title:currentQues['optionA'].length>2&& currentQues["optionA"].substring(0,2)=="ee"? Math.tex("a.\\;\\;${currentQues['optionA'].substring(2)}",textStyle: TextStyle(fontSize: 18)) :Text("a . ${currentQues['optionA']}"),
                                     ),
                                   )),
                               SizedBox(
@@ -296,9 +307,10 @@ class _TypeScreen extends State<QuestionScreenAdmin> {
                                         borderRadius:
                                             BorderRadius.circular(10)),
                                     child: ListTile(
-                                      title: Text(
-                                        "b.  ${questions[index]["optionB"]}",
-                                      ),
+                              title:currentQues['optionB'].length>2&& currentQues["optionB"].substring(0,2)=="ee"? Math.tex("b.\\;\\;${currentQues['optionB'].substring(2)}",textStyle: TextStyle(fontSize: 18)) :Text("b . ${currentQues['optionB']}"),
+                                      // title: Text(
+                                      //   "b.  ${questions[index]["optionB"]}",
+                                      // ),
                                     ),
                                   )),
                               SizedBox(
@@ -329,9 +341,10 @@ class _TypeScreen extends State<QuestionScreenAdmin> {
                                         borderRadius:
                                             BorderRadius.circular(10)),
                                     child: ListTile(
-                                      title: Text(
-                                        "c.  ${questions[index]["optionC"]}",
-                                      ),
+                              title:currentQues['optionC'].length>2&& currentQues["optionC"].substring(0,2)=="ee"? Math.tex("c.\\;\\;${currentQues['optionC'].substring(2)}",textStyle: TextStyle(fontSize: 18)) :Text("c . ${currentQues['optionC']}"),
+                                      // title: Text(
+                                      //   "c.  ${questions[index]["optionC"]}",
+                                      // ),
                                     ),
                                   )),
                               SizedBox(
@@ -362,9 +375,10 @@ class _TypeScreen extends State<QuestionScreenAdmin> {
                                         borderRadius:
                                             BorderRadius.circular(10)),
                                     child: ListTile(
-                                      title: Text(
-                                        "d.  ${questions[index]["optionD"]}",
-                                      ),
+                              title:currentQues['optionD'].length>2&& currentQues["optionD"].substring(0,2)=="ee"? Math.tex("d.\\;\\;${currentQues['optionD'].substring(2)}",textStyle: TextStyle(fontSize: 18)) :Text("d . ${currentQues['optionD']}"),
+                                      // title: Text(
+                                      //   "d.  ${questions[index]["optionD"]}",
+                                      // ),
                                     ),
                                   )),
                               SizedBox(
@@ -395,9 +409,10 @@ class _TypeScreen extends State<QuestionScreenAdmin> {
                                         borderRadius:
                                             BorderRadius.circular(10)),
                                     child: ListTile(
-                                      title: Text(
-                                        "e.  ${questions[index]["optionE"]}",
-                                      ),
+                              title:currentQues['optionE'].length>2&& currentQues["optionE"].substring(0,2)=="ee"? Math.tex("e.\\;\\;${currentQues['optionE'].substring(2)}",textStyle: TextStyle(fontSize: 18)) :Text("e . ${currentQues['optionE']}"),
+                                      // title: Text(
+                                      //   "e.  ${questions[index]["optionE"]}",
+                                      // ),
                                     ),
                                   )):SizedBox(),
                               SizedBox(

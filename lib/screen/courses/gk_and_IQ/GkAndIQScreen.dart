@@ -2,9 +2,11 @@ import 'dart:convert';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_math_fork/flutter_math.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:fuzzywuzzy/fuzzywuzzy.dart';
 import 'package:loksewa/screen/customization/change_ui_background.dart';
@@ -208,6 +210,7 @@ class _GkAndIQScreen extends State<GkAndIQScreen> {
     } //swtich
   }
 
+  var currentQues;
   @override
   Widget build(BuildContext context) {
     var args =
@@ -355,6 +358,7 @@ class _GkAndIQScreen extends State<GkAndIQScreen> {
                         itemCount: datas.length,
                         shrinkWrap: true,
                         itemBuilder: (context, index) {
+                          currentQues = datas[index];
                           return Padding(
                             padding: const EdgeInsets.only(
                                 left: 10, right: 10, top: 30),
@@ -389,6 +393,8 @@ class _GkAndIQScreen extends State<GkAndIQScreen> {
                                             child: InkWell(
                                               child: Text(
                                                 "${index + 1}. ${datas[index]["questionTitle"]}",
+                                                  // r"\text {What is the name of hello world this is good things?}\\ \\frac 4 5 \\text {is good to have}",
+                                                  
                                                 // overflow: TextOverflow.clip,
                                                 style: TextStyle(
                                                     fontSize: 18,
@@ -487,11 +493,31 @@ class _GkAndIQScreen extends State<GkAndIQScreen> {
                                                 children: [
                                                   Expanded(
                                                     child: ListTile(
-                                                      title: Text(
-                                                        "a.  ${datas[index]["optionA"]}",
-                                                        style: TextStyle(
-                                                            color: textColor),
-                                                      ),
+                                                      title: currentQues['optionA']
+                                                                      .length >
+                                                                  2 &&
+                                                              currentQues["optionA"]
+                                                                      .substring(
+                                                                          0,
+                                                                          2) ==
+                                                                  "ee"
+                                                          ? Math.tex(
+                                                              "a.\\;\\;${currentQues['optionA'].substring(2)}",
+                                                              textStyle: TextStyle(
+                                                                  fontSize: 18,
+                                                                  color:
+                                                                      textColor))
+                                                          : Text(
+                                                              "a . ${currentQues['optionA']}",
+                                                              style: TextStyle(
+                                                                  color:
+                                                                      textColor),
+                                                            ),
+                                                      // title: Text(
+                                                      //   "a.  ${datas[index]["optionA"]}",
+                                                      //   style: TextStyle(
+                                                      //       color: textColor),
+                                                      // ),
                                                     ),
                                                   ),
                                                   // Lottie.asset("assets/lottie/loved.json",height: 40),
@@ -557,11 +583,31 @@ class _GkAndIQScreen extends State<GkAndIQScreen> {
                                                 children: [
                                                   Expanded(
                                                     child: ListTile(
-                                                      title: Text(
-                                                        "b.  ${datas[index]["optionB"]}",
-                                                        style: TextStyle(
-                                                            color: textColor),
-                                                      ),
+                                                      title: currentQues['optionB']
+                                                                      .length >
+                                                                  2 &&
+                                                              currentQues["optionB"]
+                                                                      .substring(
+                                                                          0,
+                                                                          2) ==
+                                                                  "ee"
+                                                          ? Math.tex(
+                                                              "b.\\;\\;${currentQues['optionB'].substring(2)}",
+                                                              textStyle: TextStyle(
+                                                                  fontSize: 18,
+                                                                  color:
+                                                                      textColor))
+                                                          : Text(
+                                                              "b . ${currentQues['optionB']}",
+                                                              style: TextStyle(
+                                                                  color:
+                                                                      textColor),
+                                                            ),
+                                                      // title: Text(
+                                                      //   "b.  ${datas[index]["optionB"]}",
+                                                      //   style: TextStyle(
+                                                      //       color: textColor),
+                                                      // ),
                                                     ),
                                                   ),
                                                   // Lottie.asset("assets/lottie/loved.json",height: 40),
@@ -627,11 +673,31 @@ class _GkAndIQScreen extends State<GkAndIQScreen> {
                                                 children: [
                                                   Expanded(
                                                     child: ListTile(
-                                                      title: Text(
-                                                        "c.  ${datas[index]["optionC"]}",
-                                                        style: TextStyle(
-                                                            color: textColor),
-                                                      ),
+                                                      title: currentQues['optionC']
+                                                                      .length >
+                                                                  2 &&
+                                                              currentQues["optionC"]
+                                                                      .substring(
+                                                                          0,
+                                                                          2) ==
+                                                                  "ee"
+                                                          ? Math.tex(
+                                                              "c.\\;\\;${currentQues['optionC'].substring(2)}",
+                                                              textStyle: TextStyle(
+                                                                  fontSize: 18,
+                                                                  color:
+                                                                      textColor))
+                                                          : Text(
+                                                              "c . ${currentQues['optionC']}",
+                                                              style: TextStyle(
+                                                                  color:
+                                                                      textColor),
+                                                            ),
+                                                      // title: Text(
+                                                      //   "c.  ${datas[index]["optionC"]}",
+                                                      //   style: TextStyle(
+                                                      //       color: textColor),
+                                                      // ),
                                                     ),
                                                   ),
                                                   // Lottie.asset("assets/lottie/loved.json",height: 40),
@@ -698,11 +764,31 @@ class _GkAndIQScreen extends State<GkAndIQScreen> {
                                                 children: [
                                                   Expanded(
                                                     child: ListTile(
-                                                      title: Text(
-                                                        "d.  ${datas[index]["optionD"]}",
-                                                        style: TextStyle(
-                                                            color: textColor),
-                                                      ),
+                                                      title: currentQues['optionD']
+                                                                      .length >
+                                                                  2 &&
+                                                              currentQues["optionD"]
+                                                                      .substring(
+                                                                          0,
+                                                                          2) ==
+                                                                  "ee"
+                                                          ? Math.tex(
+                                                              "d.\\;\\;${currentQues['optionD'].substring(2)}",
+                                                              textStyle: TextStyle(
+                                                                  fontSize: 18,
+                                                                  color:
+                                                                      textColor))
+                                                          : Text(
+                                                              "d . ${currentQues['optionD']}",
+                                                              style: TextStyle(
+                                                                  color:
+                                                                      textColor),
+                                                            ),
+                                                      // title: Text(
+                                                      //   "d.  ${datas[index]["optionD"]}",
+                                                      //   style: TextStyle(
+                                                      //       color: textColor),
+                                                      // ),
                                                     ),
                                                   ),
                                                   // Lottie.asset("assets/lottie/loved.json",height: 40),
@@ -731,72 +817,102 @@ class _GkAndIQScreen extends State<GkAndIQScreen> {
                                         height: 10,
                                       ),
 
-                                    datas[index]["optionE"]!=null?  InkWell(
-                                          onTap: () {
-                                            if (datas[index]["color" +
-                                                    datas[index]
-                                                        ["correctAnswer"]] !=
-                                                null) {
-                                              return;
-                                            }
-                                            currentClicked = index;
-                                            if (datas[index]["correctAnswer"] ==
-                                                "E") {
-                                              setState(() {
-                                                datas[index]["colorE"] =
-                                                    Colors.green.shade500;
-                                              });
-                                            } //if
-                                            else {
-                                              setState(() {
-                                                datas[index]["colorE"] =
-                                                    Colors.red.shade500;
-                                              });
-                                            } //if
-                                          },
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                          child: Container(
-                                            decoration: BoxDecoration(
-                                                color: datas[index]["colorE"],
-                                                borderRadius:
-                                                    BorderRadius.circular(10)),
-                                            child: Padding(
-                                              padding: const EdgeInsets.only(
-                                                  right: 15),
-                                              child: Row(
-                                                children: [
-                                                  Expanded(
-                                                    child: ListTile(
-                                                      title: Text(
-                                                        "e.  ${datas[index]["optionE"]}",
-                                                        style: TextStyle(
-                                                            color: textColor),
+                                      datas[index]["optionE"] != null
+                                          ? InkWell(
+                                              onTap: () {
+                                                if (datas[index]["color" +
+                                                        datas[index][
+                                                            "correctAnswer"]] !=
+                                                    null) {
+                                                  return;
+                                                }
+                                                currentClicked = index;
+                                                if (datas[index]
+                                                        ["correctAnswer"] ==
+                                                    "E") {
+                                                  setState(() {
+                                                    datas[index]["colorE"] =
+                                                        Colors.green.shade500;
+                                                  });
+                                                } //if
+                                                else {
+                                                  setState(() {
+                                                    datas[index]["colorE"] =
+                                                        Colors.red.shade500;
+                                                  });
+                                                } //if
+                                              },
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                              child: Container(
+                                                decoration: BoxDecoration(
+                                                    color: datas[index]
+                                                        ["colorE"],
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            10)),
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          right: 15),
+                                                  child: Row(
+                                                    children: [
+                                                      Expanded(
+                                                        child: ListTile(
+                                                      title: currentQues['optionE']
+                                                                      .length >
+                                                                  2 &&
+                                                              currentQues["optionE"]
+                                                                      .substring(
+                                                                          0,
+                                                                          2) ==
+                                                                  "ee"
+                                                          ? Math.tex(
+                                                              "e.\\;\\;${currentQues['optionE'].substring(2)}",
+                                                              textStyle: TextStyle(
+                                                                  fontSize: 18,
+                                                                  color:
+                                                                      textColor))
+                                                          : Text(
+                                                              "e . ${currentQues['optionE']}",
+                                                              style: TextStyle(
+                                                                  color:
+                                                                      textColor),
+                                                            ),
+                                                          // title: Text(
+                                                          //   "e.  ${datas[index]["optionE"]}",
+                                                          //   style: TextStyle(
+                                                          //       color:
+                                                          //           textColor),
+                                                          // ),
+                                                        ),
                                                       ),
-                                                    ),
+                                                      // Lottie.asset("assets/lottie/loved.json",height: 40),
+                                                      // Lottie.asset("assets/lottie/sad.json",height: 35),
+                                                      // datas[index]["colorA"]==Colors.green.shade500 ?  Lottie.asset("assets/lottie/loved.json",height: 40): datas[index]["colorA"]!=null? Lottie.asset("assets/lottie/sad.json",height: 35):null,
+                                                      if (currentClicked ==
+                                                              index &&
+                                                          datas[index]
+                                                                  ["colorE"] !=
+                                                              null)
+                                                        if (datas[index]
+                                                                ["colorE"] ==
+                                                            Colors
+                                                                .green.shade500)
+                                                          Lottie.asset(
+                                                              "assets/lottie/loved.json",
+                                                              height: 40)
+                                                        else if (datas[index]
+                                                                ["colorE"] ==
+                                                            Colors.red.shade500)
+                                                          Lottie.asset(
+                                                              "assets/lottie/sad.json",
+                                                              height: 35)
+                                                    ],
                                                   ),
-                                                  // Lottie.asset("assets/lottie/loved.json",height: 40),
-                                                  // Lottie.asset("assets/lottie/sad.json",height: 35),
-                                                  // datas[index]["colorA"]==Colors.green.shade500 ?  Lottie.asset("assets/lottie/loved.json",height: 40): datas[index]["colorA"]!=null? Lottie.asset("assets/lottie/sad.json",height: 35):null,
-                                                  if (currentClicked == index &&
-                                                      datas[index]["colorE"] !=
-                                                          null)
-                                                    if (datas[index]
-                                                            ["colorE"] ==
-                                                        Colors.green.shade500)
-                                                      Lottie.asset(
-                                                          "assets/lottie/loved.json",
-                                                          height: 40)
-                                                    else if (datas[index]
-                                                            ["colorE"] ==
-                                                        Colors.red.shade500)
-                                                      Lottie.asset(
-                                                          "assets/lottie/sad.json",
-                                                          height: 35)
-                                                ],
-                                              ),
-                                            ),
-                                          )):SizedBox(),
+                                                ),
+                                              ))
+                                          : SizedBox(),
 
                                       datas.elementAt(index)["hint"] != null &&
                                               datas.elementAt(index)["color" +
