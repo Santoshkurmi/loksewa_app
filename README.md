@@ -27,18 +27,32 @@ Click the below thumbnail to watch the video
 This are some screenshots of the app
 
 ![Screenshot](readme_assets/1.jpg)
+
+
 ![Screenshot](readme_assets/2.jpg)
+
 ![Screenshot](readme_assets/3.jpg)
+
 ![Screenshot](readme_assets/4.jpg)
+
 ![Screenshot](readme_assets/5.jpg)
+
 ![Screenshot](readme_assets/6.jpg)
+
 ![Screenshot](readme_assets/7.jpg)
+
 ![Screenshot](readme_assets/8.jpg)
+
 ![Screenshot](readme_assets/9.jpg)
+
 ![Screenshot](readme_assets/10.jpg)
+
 ![Screenshot](readme_assets/11.jpg)
+
 ![Screenshot](readme_assets/12.jpg)
+
 ![Screenshot](readme_assets/13.jpg)
+
 ![Screenshot](readme_assets/14.jpg)
 
 
